@@ -2,173 +2,77 @@
 
 
 
+&#x20;**Features**
 
-**Overview**
 
-DataGPT is an AI-powered conversational database assistant that enables users to interact with databases using natural language.
 
+\- Natural Language → SQL
 
+\- SQLite Database
 
-The system automatically converts user questions into SQL queries, executes them against a database, generates visualizations, and provides business insights.
+\- Gemini AI
 
+\- Interactive Charts
 
+\- AI Insights
 
-**Features**
+\- ER Diagram Generation
 
+\- Schema Explanation
 
+\- Query History
 
-\* Natural Language to SQL
 
-\* SQL Query Transparency
 
-\* CSV Upload
+**Technical Stack**
 
-\* SQLite Database Integration
 
-\* Query Execution
 
-\* Dashboard Analytics
+\- FastAPI
 
-\* Bar Chart Visualization
+\- Python
 
-\* Line Chart Visualization
+\- SQLite
 
-\* Pie Chart Visualization
+\- HTML/CSS/JavaScript
 
-\* Database Schema Viewer
+\- Google Gemini
 
-\* ER Diagram Generator
 
-\* Flowchart Generator
 
-\* Query History
+**Installation**
 
-\* Data Explanation and Insights
 
-
-
-**Technology Stack**
-
-Backend
-
-\* FastAPI
-
-\* Python
-
-\* SQLite
-
-
-
-Data Processing
-
-\* Pandas
-
-\* SQLAlchemy
-
-
-
-Visualization
-
-\* Matplotlib
-
-\* Mermaid
-
-
-
-Frontend
-
-\* HTML
-
-\* CSS
-
-\* JavaScript
-
-
-
-APIs
-
-Chat
-
-POST /chat
-
-Upload CSV
-
-POST /upload-csv
-
-Dashboard
-
-GET /dashboard
-
-Schema
-
-GET /schema
-
-Flowchart
-
-GET /flowchart
-
-ER Diagram
-
-GET /er-diagram
-
-History
-
-GET /history
-
-
-
-**Run Locally**
-
-Install dependencies:
 
 pip install -r requirements.txt
 
 
 
-**Run application:**
-
-uvicorn main:app –reload
+uvicorn main:app --reload
 
 
 
-Open:
+Open
+
+
 
 http://127.0.0.1:8000
 
 
 
-**Project Structure**
+
+
+**Future Enhancements**
 
 
 
-backend/
+\- Voice Queries
 
-\* main.py
+\- PostgreSQL/MySQL Support
 
-\* sql\_agent.py
+\- User Authentication
 
-\* chart\_tool.py
+\- Cloud Deployment
 
-\* schema\_tool.py
-
-\* diagram\_tool.py
-
-\* flowchart\_tool.py
-
-\* explain\_tool.py
-
-\* index.html
-
-\* dashboard.html
-
-\* flowchart.html
-
-\* database.db
-
-\* requirements.txt
-
-\* README.md
-
-
-DataGPT – An intelligent LLM agent that enables natural language interaction with databases, automatic SQL generation, data visualization, and AI-powered insights.
+\- Predictive Analytics
 
