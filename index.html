@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataGPT</title>
+    <style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#f4f6f9;
+        margin:0;
+        padding:30px;
+    }
+
+    .container{
+        max-width:900px;
+        margin:auto;
+        background:white;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+        color:#2563eb;
+    }
+
+    h3{
+        color:#333;
+        margin-top:20px;
+    }
+
+    #msg{
+        width:70%;
+        padding:12px;
+        border:1px solid #ddd;
+        border-radius:6px;
+    }
+
+    button{
+        padding:12px 18px;
+        background:#2563eb;
+        color:white;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+     }
+
+     button:hover{
+         background:#1d4ed8;
+     }
+
+     .card{
+         background:#f9fafb;
+         padding:15px;
+         border-radius:8px;
+         margin-top:10px;
+         box-shadow:0 1px 4px rgba(0,0,0,0.08);
+     }
+
+     #answer,
+     #sql,
+     #explanation{
+         background:#f9fafb;
+         padding:15px;
+         border-radius:8px;
+         margin-top:10px;
+     }
+
+     #chart{
+         margin-top:20px;
+         max-width:700px;
+         border-radius:10px;
+     }
+     </style>
+</head>
+
+<body>
+<div class="container">
+<h2>💬 DataGPT Chat</h2>
+
+<input id="msg" placeholder="Ask something..." />
+
+<button onclick="send()">Send</button>
+
+<button onclick="showSchema()">
+    Show Schema
+</button>
+
+<button onclick="window.open('/dashboard-ui')">
+    Dashboard
+</button>
+
+<button onclick="window.open('/flowchart-ui')">
+    Flowchart
+</button> 
+
+<button onclick="window.open('/er-diagram')">
+     ER Diagram
+</button> 
+
+<h3>Answer</h3>
+<div id="answer"></div>
+
+<h3>Generated SQL</h3>
+<pre id="sql"></pre>
+
+<h3>Explanation</h3>
+<div id="explanation"></div>
+
+<h3>Insights</h3>
+<ul id="insights"></ul>
+
+<h3>History</h3>
+<ul id="history"></ul>
+
+<h3>Database Schema</h3>
+<pre id="schema"></pre>
+
+<img id="chart" />
+
+
+<script>
+
+async function send() {
+
+    const message = document.getElementById("msg").value;
+
+    const res = await fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: message
+        })
+    });
+
+    const data = await res.json();
+
+    // Answer
+    document.getElementById("answer").innerText =
+        data.answer || "";
+
+    // SQL
+    document.getElementById("sql").innerText =
+        data.sql || "";
+
+    // Explanation
+    document.getElementById("explanation").innerText =
+        data.explanation || "";
+
+    // Insights
+    if (data.insights) {
+
+        let html = "";
+
+        data.insights.forEach(i => {
+            html += `<li>${i}</li>`;
+        });
+
+        document.getElementById("insights").innerHTML = html;
+    }
+
+    // Chart
+    if (data.chart) {
+        document.getElementById("chart").src =
+            "http://127.0.0.1:8000/" + data.chart;
+    }
+
+    // Refresh History
+    loadHistory();
+}
+
+
+async function loadHistory() {
+
+    const res = await fetch("/history");
+    const data = await res.json();
+
+    let html = "";
+
+    data.history.forEach(item => {
+        html += `<li>${item.question}</li>`;
+    });
+
+    document.getElementById("history").innerHTML = html;
+}
+
+
+async function showSchema() {
+
+    const res = await fetch("/schema");
+    const data = await res.json();
+
+    document.getElementById("schema").innerText =
+        JSON.stringify(data.schema, null, 2);
+}
+window.onload = loadHistory;
+
+</script>
+
+<>/div
+</body>
+</html>

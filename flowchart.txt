@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+
+    async function loadDiagram() {
+      const response = await fetch("/er-diagram");
+      const data = await response.json();
+
+      document.getElementById("diagram").innerHTML = data.diagram;
+
+      mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+    }
+
+    window.onload = loadDiagram;
+  </script>
+</head>
+
+<body>
+  <h2>DataGPT Flowchart</h2>
+
+  <div id="diagram" class="mermaid"></div>
+</body>
+</html>
