@@ -44,7 +44,8 @@ def chat(request: ChatRequest):
             "insights": insights
         }
 
-        if "chart" in request.message.lower():
+        if "revenue" in request.message.lower() and "region" in request.message.lower():
+            revenue_by_region()   # Generate the chart
             response["chart"] = "revenue_chart.png"
         history.append({
            "question": request.message,
@@ -172,17 +173,6 @@ E --> F
 """
     }
 
-@app.post("/explain")
-def explain(request: ChatRequest):
-
-    result = query_database(request.message)
-
-    explanation = explain_data(result["results"])
-
-    return {
-        "sql": result["sql"],
-        "explanation": explanation
-    }
 
 @app.post("/export-csv")
 def export_csv(request: ChatRequest):
@@ -213,10 +203,12 @@ def explain(request: ChatRequest):
     result = query_database(request.message)
 
     explanation = explain_data(result["results"])
+    insights = get_insights(result["results"])
 
     return {
         "sql": result["sql"],
-        "explanation": explanation
+        "explanation": explanation,
+        "insights": insights
     }
 
 @app.get("/dashboard")

@@ -1,4 +1,6 @@
 import sqlite3
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 def revenue_by_region():
