@@ -1,24 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flowchart</title>
+    <title>DataGPT Flowchart</title>
+
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:40px;
+            background:#f5f7fa;
+        }
+
+        h1{
+            color:#2563eb;
+            text-align:center;
+        }
+
+        .box{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>DataGPT Workflow</h2>
+<h1>📈 DataGPT Workflow</h1>
+
+<div class="box">
 
 <div class="mermaid">
+
 flowchart TD
-A[Upload CSV] --> B[Store in SQLite]
-B --> C[Generate SQL]
-C --> D[Execute Query]
-D --> E[Generate Chart]
-E --> F[Display Results]
+
+A([User Question])
+B[LLM Agent]
+C[Generate SQL]
+D[(SQLite Database)]
+E[Execute Query]
+F[Query Results]
+G[Generate Charts]
+H[Generate Insights]
+I[Display Response]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
+F --> H
+G --> I
+H --> I
+
+</div>
+
 </div>
 
 <script>
-mermaid.initialize({ startOnLoad: true });
+mermaid.initialize({
+    startOnLoad:true
+});
 </script>
 
 </body>
